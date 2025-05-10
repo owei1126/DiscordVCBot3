@@ -89,5 +89,16 @@ client.on('interactionCreate', async interaction => {
   }
 });
 
+// 下拉選單互動監聽
+import { handleSettingsMenu } from './interactions/settingsMenu.js';
+
+client.on('interactionCreate', async (interaction) => {
+  if (!interaction.isStringSelectMenu()) return;
+  if (interaction.customId === 'settingsMenu') {
+    await handleSettingsMenu(interaction);
+  }
+});
+
+
 // ✅ 登入 Discord Bot（記得 .env 裡有設好 DISCORD_TOKEN）
 client.login(process.env.DISCORD_TOKEN);
