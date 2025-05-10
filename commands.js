@@ -6,7 +6,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { commandDescriptions } from './commandDescriptions.js'; // ✅ 外部引入
-import { showSettingsMenu } from './interactions/settingsMenu.js';
+import { handleSettingsMenu } from './interactions/settingsMenu.js';
+
 
 
 const __filename = fileURLToPath(import.meta.url);
