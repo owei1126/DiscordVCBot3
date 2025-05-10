@@ -50,5 +50,4 @@ export async function handleSettingsMenu(interaction) {
   // 儲存設定
   fs.writeFileSync('./setting.json', JSON.stringify(settings, null, 2));
 }
-export { handleSettingsMenu };
 
