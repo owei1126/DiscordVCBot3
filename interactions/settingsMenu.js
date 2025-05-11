@@ -51,3 +51,44 @@ export async function handleSettingsMenu(interaction) {
   fs.writeFileSync('./setting.json', JSON.stringify(settings, null, 2));
 }
 
+import {
+    ActionRowBuilder,
+    StringSelectMenuBuilder,
+    StringSelectMenuOptionBuilder
+  } from 'discord.js';
+  
+  export async function showSettingsMenu(message) {
+    const row = new ActionRowBuilder().addComponents(
+      new StringSelectMenuBuilder()
+        .setCustomId('settingsMenu')
+        .setPlaceholder('📋 請選擇設定項目')
+        .addOptions(
+          new StringSelectMenuOptionBuilder()
+            .setLabel('設定通知頻道')
+            .setValue('setChannel')
+            .setEmoji('📢'),
+          new StringSelectMenuOptionBuilder()
+            .setLabel('設定自動身分組')
+            .setValue('setRole')
+            .setEmoji('🎭'),
+          new StringSelectMenuOptionBuilder()
+            .setLabel('移除通知頻道')
+            .setValue('removeChannel')
+            .setEmoji('🗑️'),
+          new StringSelectMenuOptionBuilder()
+            .setLabel('移除自動身分組')
+            .setValue('removeRole')
+            .setEmoji('🚫'),
+          new StringSelectMenuOptionBuilder()
+            .setLabel('顯示目前設定')
+            .setValue('showConfig')
+            .setEmoji('📊'),
+        )
+    );
+  
+    await message.reply({
+      content: '🔧 請從下拉選單選擇您要進行的設定項目：',
+      components: [row]
+    });
+  }
+  

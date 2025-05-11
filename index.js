@@ -9,7 +9,7 @@ import settings from './setting.json' assert { type: 'json' };
 import { handleCommands } from './commands.js';
 import voiceTimer from './voice-features/voiceTimer.js';
 import  joinLeaveNotify  from './voice-features/joinLeaveNotify.js';
-
+import { handleSettingsMenu } from './interactions/settingsMenu.js';
 
 // ❗注意：檔名後面請加 `.js`，ESM 不允許省略副檔名
 
@@ -90,7 +90,7 @@ client.on('interactionCreate', async interaction => {
 });
 
 // 下拉選單互動監聽
-import { handleSettingsMenu } from './interactions/settingsMenu.js';
+
 
 client.on('interactionCreate', async (interaction) => {
   if (!interaction.isStringSelectMenu()) return;

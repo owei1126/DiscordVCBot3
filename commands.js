@@ -6,7 +6,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { commandDescriptions } from './commandDescriptions.js'; // ✅ 外部引入
-import { handleSettingsMenu } from './interactions/settingsMenu.js';
+import { handleSettingsMenu, showSettingsMenu } from './interactions/settingsMenu.js';
+
 
 
 
@@ -130,8 +131,10 @@ export async function handleCommands(message, prefix) {
     }
 
     // === 指令：設定（顯示下拉選單） ===
-  if (cmd === '設定') {
-    showSettingsMenu(message); // 呼叫互動元件的函式
-  }
+    if (cmd === '設定') {
+      await showSettingsMenu(message); // 確保有引入 showSettingsMenu 並傳入 message
+      return;
+    }
+    
 
 }
