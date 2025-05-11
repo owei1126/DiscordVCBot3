@@ -93,11 +93,28 @@ client.on('interactionCreate', async interaction => {
 
 
 client.on('interactionCreate', async (interaction) => {
-  if (!interaction.isStringSelectMenu()) return;
-  if (interaction.customId === 'settingsMenu') {
+  // 📋 設定主選單
+  if (interaction.isStringSelectMenu() && interaction.customId === 'settingsMenu') {
     await handleSettingsMenu(interaction);
   }
+
+  // 📢 頻道選擇選單
+  if (interaction.isChannelSelectMenu() && interaction.customId === 'selectNotifyChannel') {
+    const guildId = interaction.guildId;
+    const selectedChannelId = interaction.values[0];
+
+    if (!settings[guildId]) settings[guildId] = {};
+    settings[guildId].voiceChannel = selectedChannelId;
+
+    fs.writeFileSync('./setting.json', JSON.stringify(settings, null, 2));
+
+    await interaction.reply({
+      content: `✅ 已設定語音通知頻道為 <#${selectedChannelId}>`,
+      ephemeral: true,
+    });
+  }
 });
+
 
 
 // ✅ 登入 Discord Bot（記得 .env 裡有設好 DISCORD_TOKEN）

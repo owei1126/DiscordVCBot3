@@ -14,10 +14,26 @@ export async function handleSettingsMenu(interaction) {
   const member = interaction.member;
 
   switch (selected) {
-    case 'setChannel':
-      settings[guildId].voiceChannel = interaction.channel.id;
-      await interaction.reply(`✅ 已將通知頻道設定為 <#${interaction.channel.id}>`);
-      break;
+    case 'setChannel': {
+        const { ChannelSelectMenuBuilder, ActionRowBuilder } = await import('discord.js');
+      
+        const selectMenu = new ChannelSelectMenuBuilder()
+          .setCustomId('selectNotifyChannel')
+          .setPlaceholder('請選擇一個語音通知頻道')
+          .setMinValues(1)
+          .setMaxValues(1)
+          .addChannelTypes(0, 5, 11, 12); // 文字、論壇、討論串、公告頻道
+      
+        const row = new ActionRowBuilder().addComponents(selectMenu);
+      
+        await interaction.reply({
+          content: '📢 請從下方選擇要作為語音成員通知用的頻道：',
+          components: [row],
+          ephemeral: true,
+        });
+        break;
+      }
+      
 
     case 'setRole':
       const role = member.roles.highest; // 或者引導用戶用 W!設定角色 @role
