@@ -10,6 +10,8 @@ import { handleCommands } from './commands.js';
 import voiceTimer from './voice-features/voiceTimer.js';
 import  joinLeaveNotify  from './voice-features/joinLeaveNotify.js';
 import { handleSettingsMenu } from './interactions/settingsMenu.js';
+import fs from 'fs';
+
 
 // ❗注意：檔名後面請加 `.js`，ESM 不允許省略副檔名
 
